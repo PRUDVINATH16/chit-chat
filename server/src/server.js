@@ -25,11 +25,12 @@ app.use("/api/message", messageRoutes);
 // Serve client in production
 if (process.env.NODE_ENV === "production") {
   // Serve static files from client folder
-  app.use(express.static(path.join(__dirname, "../client")));
+  console.log(__dirname)
+  app.use(express.static(path.join(__dirname, "../../client/index.html")));
 
   // Catch-all route to serve index.html for SPA routing
   app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/index.html"));
+    res.sendFile(path.join(__dirname, "../../client/index.html"));
   });
 }
 
