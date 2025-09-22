@@ -1,0 +1,20 @@
+{
+  "name": "chit-chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix server",
+    "start": "node server/src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRUDVINATH16/chit-chat.git"
+  },
+  "author": "Prudvinath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PRUDVINATH16/chit-chat/issues"
+  },
+  "homepage": "https://github.com/PRUDVINATH16/chit-chat#readme",
+  "description": ""
+}
