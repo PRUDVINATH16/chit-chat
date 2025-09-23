@@ -11,27 +11,33 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Fix __dirname for ES modules
+// ✅ Proper __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware for JSON parsing
 app.use(express.json());
 
+// 🔑 Serve static files for dev (optional if you only serve in prod)
+app.use(express.static(path.join(__dirname, "client")));
+
 // API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 
-// Serve client in production
+// 👉 Serve client in production
 if (process.env.NODE_ENV === "production") {
-  // Serve static files from client folder
-  console.log(__dirname)
-  app.use(express.static(path.join(__dirname, "../../client/index.html")));
+  // Absolute path to the client build folder
+  const clientPath = path.join(__dirname, "../../client");
 
-  // Catch-all route to serve index.html for SPA routing
+  // Serve static assets from that folder
+  app.use(express.static(clientPath));
+
+  // Catch-all route to index.html for SPA routing
+  // Use a *string* pattern, not a regex literal
   app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "../../client/index.html"));
-  });
+  res.sendFile(path.join(clientPath, "index.html"));
+});
 }
 
 // Start server
