@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js";
+import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 
 export const signup = async (req, res) => {
 
@@ -38,12 +39,19 @@ export const signup = async (req, res) => {
       await newUser.save();
       generateToken(newUser._id, res);
 
+      try {
+        await sendWelcomeEmail(email, fullName, "https://chit-chat-futer.sevalla.app");
+      } catch (error) {
+        console.error("Failed to send welcome email:", error);
+      }
+
       return res.status(201).json({
         _id: newUser._id,
         fullName: newUser.username,
         email: newUser.email,
         profilePic: newUser.profilePic
       });
+      
     } else {
       return res.status(400).json({message: "Invalid user data"});
     }

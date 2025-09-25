@@ -5,11 +5,11 @@ async function checkUser() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ fullName: "Test User2", email: "test2@example.com", password: "password123"}),
+    body: JSON.stringify({ fullName: "Test User6", email: "patnamprudvi3@gmail.com", password: "password123"}),
   });
 
   const data = await response.json();
   console.log(data);
 }
 
-//checkUser();
+checkUser();
