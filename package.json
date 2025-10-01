@@ -16,5 +16,8 @@
     "url": "https://github.com/PRUDVINATH16/chit-chat/issues"
   },
   "homepage": "https://github.com/PRUDVINATH16/chit-chat#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "nodemailer": "^7.0.6"
+  }
 }
