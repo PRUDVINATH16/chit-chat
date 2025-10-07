@@ -15,6 +15,7 @@ export default async function doFetch(url, type = "GET", data = {}) {
     const options = {
       method: type.toUpperCase(),
       headers: { "Content-Type": "application/json" },
+      credentials: "include"
     };
 
     if (type.toUpperCase() !== "GET") {

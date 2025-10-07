@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login chat-chat</title>
+  <link rel="icon" href="/logos/logo.png?v=2" type="image/png">
 
   <!-- styles -->
   <link rel="stylesheet" href="styles/background.css">
@@ -39,10 +40,10 @@
         </div>
         <form class="form-container form-container-signup">
           <div class="form-group">
-            <label for="fullname" id="fullname">Password</label>
+            <label for="fullname" id="fullname">Enter full name</label>
             <div class="input-full-name">
               <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user auth-input-icon" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              <input type="text" placeholder="Enter your Full Name">
+              <input type="text" placeholder="Enter your Full Name" class="full-name">
             </div>
           </div>
           <div class="form-group">
@@ -54,7 +55,7 @@
                 <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
                 <rect x="2" y="4" width="20" height="16" rx="2"></rect>
               </svg>
-              <input type="email" placeholder="johndoe@gmail.com">
+              <input type="email" placeholder="johndoe@gmail.com" class="email">
             </div>
           </div>
           <div class="form-group">
@@ -66,13 +67,16 @@
                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
-              <input type="password" placeholder="Enter your password">
+              <input type="password" placeholder="Enter your password" class="password">
             </div>
           </div>
-          <button type="submit">Create Account</button>
+          <button type="submit" class="signup-button">Create Account</button>
         </form>
-        <div class="account-dont-have">
-          <p>Already have an account? Login</p>
+        <div class="error-message">
+          <p class="message"></p>
+        </div>
+        <div class="account-dont-have goto-login">
+          <p class="goto-login">Already have an account? Login</p>
         </div>
       </div>
       <div class="login-illustration-container">
@@ -95,7 +99,7 @@
     </div>
   </main>
 
-  <script src="scripts/signup.js"></script>
+  <script src="scripts/signup.js" type="module"></script>
 
 </body>
 

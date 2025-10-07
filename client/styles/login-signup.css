@@ -175,6 +175,7 @@ button {
 .image-container img {
   width: 100%;
   height: 95%;
+  filter: contrast(1.4);
 }
 
 .info-heading>h3{
