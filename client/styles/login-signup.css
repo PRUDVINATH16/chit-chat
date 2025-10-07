@@ -1,0 +1,374 @@
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.welcome-back-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+  gap: 10px;
+}
+
+.welcome-back-section p {
+  opacity: .7;
+}
+
+.chat-icon {
+  height: 48px;
+  width: 48px;
+  display: flex;
+  justify-self: center;
+  opacity: .6;
+}
+
+.svg-icon {
+  opacity: .8;
+  width: 22px;
+}
+
+.form-container {
+  height: 35%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-container-signup {
+  height: 45%;
+}
+
+.form-group {
+  width: 80%;
+  height: 40%;
+  row-gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 1rem;
+}
+
+.input-email, .input-password, .input-full-name {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  background-color: transparent;
+  border: 1.3px solid rgba(255, 255, 255, 0.723);
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.form-group input {
+  width: 100%;
+  height: 60%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: white;
+  letter-spacing: 2px;
+  transition: all 1s linear;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.737);
+}
+
+.input-full-name:focus-within, .input-email:focus-within, .input-password:focus-within {
+  border: 1.3px solid var(--light-blue2); /* or any color you want when active */
+  box-shadow: 0px 0px 5px var(--light-blue2);
+}
+
+button {
+  width: 80%;
+  height: 20%;
+  background-color: var(--light-blue2);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.account-dont-have {
+  height: fit-content;
+  width: fit-content;
+  padding: 5px 10px;
+  background-color: rgba(52, 214, 239, 0.064);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--light-blue2);
+  font-size: .9rem;
+}
+
+.account-dont-have:hover {
+  color: #1bd4e9c0;
+}
+
+.main-container {
+  position: relative;
+  width: 70%;
+  height: 90vh;
+  display: flex;
+  background-color: var(--blue);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.main-container::before {
+  content: '';
+  position: absolute;
+  inset: -400px;
+  border-radius: 13px;
+  background: conic-gradient(from 0deg, var(--border-color), var(--light-blue2));
+  animation: spin 3s linear infinite;
+  z-index: -5;
+}
+
+.main-container::after {
+  content: '';
+  position: absolute;
+  inset: 1.4px;
+  border-radius: 13px;
+  background-color: #152134;
+  z-index: -3;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.login-form-container {
+  width: 50%;
+}
+
+.login-illustration-container {
+  width: 50%;
+  border-left: 1.5px solid rgba(128, 128, 128, 0.300);
+}
+
+.image-container {
+  width: 85%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: 95%;
+}
+
+.info-heading>h3{
+  font-size: 1.6rem;
+  padding-bottom: 20px;
+  color: var(--light-blue2);
+}
+
+.small-info {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.small-chunks ul {
+  display: flex;
+  width: 100%;
+  padding: 10px 30px;
+  gap: 15px;
+}
+
+.small-chunks ul li {
+  list-style: none;
+  background-color: rgba(52, 214, 239, 0.064);
+  color: var(--light-blue2);
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+/* Responsive code */
+
+@media (max-width: 768px) {
+  .main-container {
+    width: 95%;
+    height: 100vh;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .login-form-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .login-illustration-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-left: none;
+    opacity: 0.15;
+    z-index: 1;
+  }
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-container img {
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .small-info {
+    display: none;
+  }
+
+  .welcome-back-section {
+    gap: 8px;
+    height: auto;
+  }
+
+  .welcome-back-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-back-section p {
+    font-size: 0.9rem;
+  }
+
+  .form-container {
+    width: 100%;
+    height: auto;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .form-container-signup {
+    height: auto;
+    gap: 18px;
+  }
+
+  .form-group {
+    width: 85%;
+    height: auto;
+    row-gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+  }
+
+  .input-email, .input-password, .input-full-name {
+    height: 50px;
+    padding: 0 12px;
+  }
+
+  .form-group input {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 85%;
+    height: 50px;
+    font-size: 0.95rem;
+    margin-top: 5px;
+  }
+
+  .account-dont-have {
+    font-size: 0.85rem;
+    margin-top: 0;
+  }
+
+  .account-dont-have p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    width: 98%;
+    height: 100vh;
+  }
+
+  .welcome-back-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .welcome-back-section p {
+    font-size: 0.85rem;
+  }
+
+  .chat-icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .form-container {
+    gap: 18px;
+  }
+
+  .form-container-signup {
+    gap: 15px;
+  }
+
+  .form-group {
+    width: 90%;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .input-email, .input-password, .input-full-name {
+    height: 48px;
+  }
+
+  button {
+    width: 90%;
+    height: 48px;
+  }
+
+  .account-dont-have {
+    font-size: 0.8rem;
+  }
+}

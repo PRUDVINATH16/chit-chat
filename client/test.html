@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .glow-box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #111;
+      /* inner background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .glow-box::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      /* makes it peek outside */
+      border-radius: inherit;
+      background: conic-gradient(from 0deg,
+          #ff0055,
+          #ffcc00,
+          #00ffcc,
+          #0066ff,
+          #ff0055);
+      animation: spin 3s linear infinite;
+      z-index: 0;
+    }
+
+    .glow-box::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      /* creates inner gap = border thickness */
+      border-radius: inherit;
+      background: #111;
+      /* same as container bg */
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow-box">
+    <div class="content">
+      ⚡ Your Content Here ⚡
+    </div>
+  </div>
+
+</body>
+
+</html>
