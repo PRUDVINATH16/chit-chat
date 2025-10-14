@@ -1,14 +1,14 @@
 import doFetch from "./do_fetch.js";
 
-document.addEventListener("DOMContentLoaded",async () => {
+document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector('.goto-signup').addEventListener('click', () => {
     location.href = 'signup.html';
   });
 
   async function checkAuth() {
     let res = await doFetch('auth/check');
-    if(res.ok != false) {
-      location.href='index.html';
+    if (res.ok != false) {
+      location.href = 'index.html';
     } else {
       return;
     }
@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded",async () => {
     event.preventDefault();
     let email = document.querySelector('.email-input').value.trim();
     let password = document.querySelector('.password-input').value.trim();
-    if(email != '' && password != '') {
-      let res = await doFetch('auth/login', 'POST', {email, password});
-      if(res.ok != false) {
-        location.href="index.html";
+    if (email != '' && password != '') {
+      let res = await doFetch('auth/login', 'POST', { email, password });
+      if (res.ok != false) {
+        location.href = "index.html";
       } else {
         errorMessage();
       }
