@@ -14,7 +14,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const __filename = fileURLToPath(import.meta.url);
-console.log(__filename);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
@@ -26,11 +25,17 @@ app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  const clientPath = path.join(__dirname, "../../client");
-  app.use(express.static(clientPath));
-  app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(clientPath, "index.html"));
-});
+  // const clientPath = path.join(__dirname, "../../client");
+  // app.use(express.static(clientPath));
+  // app.get(/.*/, (req, res) => {
+  //   res.sendFile(path.join(clientPath, "index.html"));
+  // });
+
+  app.use(express.static(path.join(__dirname, "../../client/dist")));
+
+  app.get(/.*/, (_, res) => {
+    res.sendFile(path.join(__dirname, "../../client/", "dist", "index.html"));
+  });
 }
 
 // Start server
