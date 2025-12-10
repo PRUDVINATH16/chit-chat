@@ -47,7 +47,7 @@ export const sendMessage = async (req, res) => {
       return res.status(400).json({message: "Cannot send messages to Yourself."});
     }
 
-    const receiverExsists = await User.exsists({ _id: receiverId});
+    const receiverExsists = await User.exists({ _id: receiverId});
     if(!receiverExsists) return res.status(404).json({message: "Receiver not Found!"});
 
     let imageUrl;

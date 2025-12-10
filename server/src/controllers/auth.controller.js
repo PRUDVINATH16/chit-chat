@@ -21,6 +21,8 @@ export const signup = async (req, res) => {
       return res.status(400).json({message: "Invalid email address", ok: false});
     }
 
+    console.log("details: ",fullName, email, password);
+
     const user = await User.findOne({email});
     if(user) {
       return res.status(400).json({message: "User already exists", ok: false});
@@ -30,10 +32,12 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      username: fullName,
+      fullName,
       email,
       password: hashedPassword
     });
+
+    console.log("New user to be created:\n\n", newUser);
 
     if(newUser) {
       
@@ -41,14 +45,14 @@ export const signup = async (req, res) => {
       generateToken(newUser._id, res);
 
       try {
-        await sendWelcomeEmail(email, fullName, "https://chit-chat-futer.sevalla.app");
+        await sendWelcomeEmail(email, fullName, "Chit-Chat");
       } catch (error) {
         console.error("Failed to send welcome email:", error);
       }
 
       return res.status(201).json({
         _id: newUser._id,
-        fullName: newUser.username,
+        fullName: newUser.fullName,
         email: newUser.email,
         profilePic: newUser.profilePic
       });
