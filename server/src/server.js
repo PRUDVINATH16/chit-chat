@@ -1,26 +1,29 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
+
+import { fileURLToPath } from "url";
 import { connectDB } from "./lib/db.js";
+import { server, app } from "./lib/socket.js";
 
 dotenv.config();
 
-const app = express();
 const PORT = process.env.PORT || 3000;
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
-
-app.use(cors({origin :process.env.CLIENT_URL, credentials:true}))
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "client")));
@@ -44,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   connectDB();
 });

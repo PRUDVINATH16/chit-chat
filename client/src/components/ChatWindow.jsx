@@ -8,12 +8,17 @@ import MessageInput from "./MessageInput";
 import MessagesLoadingSkeleton from "./MessagesLoadingSkeleton";
 
 function ChatWindow() {
-  const { selectedUser, getMessageByUserId, messages, isMessagesLoading } = useChatStore();
+  const { selectedUser, getMessageByUserId, messages, isMessagesLoading, subscribeToMessage, unsubscribeFromMessage } = useChatStore();
   const { authUser } = useAuthStore();
 
   useEffect(() => {
     getMessageByUserId(selectedUser._id);
-  }, [selectedUser, getMessageByUserId]);
+    subscribeToMessage();
+
+    return () => {
+      unsubscribeFromMessage();
+    }
+  }, [selectedUser, getMessageByUserId, subscribeToMessage, unsubscribeFromMessage]);
 
   const messagesEndRef = (node) => {
     if (node) {
@@ -26,7 +31,7 @@ function ChatWindow() {
       messagesEndRef(document.getElementById("messages-end"));
     }
   }, [messages]);
- 
+
   return (
     <>
       <ChatHeader />
@@ -36,16 +41,14 @@ function ChatWindow() {
             {messages.map((msg) => (
               <div
                 key={msg._id}
-                className={`chat ${
-                  msg.senderId === authUser._id ? "chat-end" : "chat-start"
-                }`}
+                className={`chat ${msg.senderId === authUser._id ? "chat-end" : "chat-start"
+                  }`}
               >
                 <div
-                  className={`chat-bubble relative ${
-                    msg.senderId === authUser._id
+                  className={`chat-bubble relative ${msg.senderId === authUser._id
                       ? "bg-cyan-600 text-white"
                       : "bg-slate-800 text-slate-200"
-                  }`}
+                    }`}
                 >
                   {msg.image && (
                     <img
