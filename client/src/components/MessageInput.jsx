@@ -64,6 +64,7 @@ function MessageInput() {
 
       <form onSubmit={handleSendMessage} className="max-w-3xl mx-auto flex space-x-3">
         <input type="text"
+          id="message-input-field"
           value={text}
           onChange={(e) => {
             setText(e.target.value);

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
 
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
@@ -11,6 +12,34 @@ import NoChatSelected from "../components/NoChatSelected";
 function ChatPage() {
 
   const { activeTab, selectedUser } = useChatStore();
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // If the user is already typing in an input, textarea, or contenteditable, do nothing
+      if (
+        e.target.tagName === 'INPUT' ||
+        e.target.tagName === 'TEXTAREA' ||
+        e.target.isContentEditable
+      ) {
+        return;
+      }
+
+      // Check if the key is a single character (letters, numbers, symbols)
+      if (e.key.length === 1) {
+        const inputField = document.getElementById('message-input-field');
+        if (inputField) {
+          inputField.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="relative w-full max-w-6xl h-[95vh]">
