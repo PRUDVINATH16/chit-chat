@@ -27,18 +27,25 @@ function ChatsList() {
             setSelectedUser(chat);
           }}
         >
-          <div className='flex items-center gap-3'>
-            <div className={`avatar ${onlineUsers.includes(chat._id) ? "online" : "offline"}`}>
-              <div className='size-8 rounded-full'>
-                <img
-                  src={chat.profilePic || "/avatar.png"}
-                  alt={chat.fullName}
-                />
+          <div className='flex items-center justify-between gap-3'>
+            <div className='flex items-center gap-3'>
+              <div className={`avatar ${onlineUsers.includes(chat._id) ? "online" : "offline"}`}>
+                <div className='size-8 rounded-full'>
+                  <img
+                    src={chat.profilePic || "/avatar.png"}
+                    alt={chat.fullName}
+                  />
+                </div>
+              </div>
+              <div className='flex flex-col'>
+                <h4 className='text-slate-200 font-medium truncate text-sm max-w-[120px]'>
+                  {chat.fullName}
+                </h4>
               </div>
             </div>
-            <h4 className='text-slate-200 fond-medium truncate text-sm'>
-              {chat.fullName}
-            </h4>
+            <p className='text-xs text-slate-400'>
+              {new Date(chat.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            </p>
           </div>
         </div>
       ))}

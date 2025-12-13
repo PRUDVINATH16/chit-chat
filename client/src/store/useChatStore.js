@@ -48,6 +48,15 @@ export const useChatStore = create((set, get) => ({
     }
   },
 
+  updateChatsOrder: async () => {
+    try {
+      const res = await axiosInstance.get("/message/chats");
+      set({ chats: res.data });
+    } catch (e) {
+      console.log("Error updating chats order:\n\n", e);
+    }
+  },
+
   getMessageByUserId: async (userId) => {
     set({ isMessagesLoading: true });
     try {
@@ -62,7 +71,7 @@ export const useChatStore = create((set, get) => ({
   },
 
   sendMessage: async (messageData) => {
-    const { selectedUser, messages, getMyChats } = get();
+    const { selectedUser, messages, updateChatsOrder } = get();
     const { authUser } = useAuthStore.getState();
 
     const tempId = `temp-${Date.now()}`;
@@ -84,7 +93,7 @@ export const useChatStore = create((set, get) => ({
         messageData
       );
       set({ messages: messages.concat(res.data) });
-      getMyChats();
+      updateChatsOrder();
     } catch (e) {
       set({ messages: messages });
       toast.error("Something went wrong");
@@ -100,12 +109,14 @@ export const useChatStore = create((set, get) => ({
     const socket = useAuthStore.getState().socket;
 
     socket.on("newMessage", (newMessage) => {
-      const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
-      if(!isMessageSentFromSelectedUser) return;
-
-      const currentMessages = get().messages;
-
-      set({ messages: [...currentMessages, newMessage] });
+      get().updateChatsOrder();
+      const { selectedUser, isSoundOn } = get();
+      const isMessageSentFromSelectedUser = selectedUser && newMessage.senderId === selectedUser._id;
+      
+      if(isMessageSentFromSelectedUser) {
+        const currentMessages = get().messages;
+        set({ messages: [...currentMessages, newMessage] });
+      }
 
       if(isSoundOn) {
         notificationSound.currentTime = 0;

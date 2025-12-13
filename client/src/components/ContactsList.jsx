@@ -13,9 +13,13 @@ function ContactList() {
 
   if (isUsersLoading) return <UsersLoadingSkeleton />;
 
+  const sortedContacts = [...allContacts].sort((a, b) =>
+    a.fullName.localeCompare(b.fullName)
+  );
+
   return (
     <>
-      {allContacts.map((contact) => (
+      {sortedContacts.map((contact) => (
         <div
           key={contact._id}
           className="bg-cyan-500/10 p-2 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors"

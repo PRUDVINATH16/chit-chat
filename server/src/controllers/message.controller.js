@@ -83,17 +83,59 @@ export const getChatPartners = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
 
-    //find all the messages where the logged-in user is either sender or receiver
+    // Find all messages involving the logged-in user, sorted by creation date
     const messages = await Message.find({
       $or: [{ senderId: loggedInUserId }, { receiverId: loggedInUserId }],
+    }).sort({ createdAt: -1 });
+
+    // Use a map to store the latest message for each chat partner
+    const latestMessagesMap = new Map();
+
+    messages.forEach((message) => {
+      const otherUserId = message.senderId.equals(loggedInUserId)
+        ? message.receiverId.toString()
+        : message.senderId.toString();
+
+      if (!latestMessagesMap.has(otherUserId)) {
+        latestMessagesMap.set(otherUserId, message);
+      }
     });
 
-    const chatPartnersIds = [...new Set(messages.map(msg => msg.senderId.toString() === loggedInUserId.toString() ? msg.receiverId.toString() : msg.senderId.toString()))];
+    const chatPartnersIds = Array.from(latestMessagesMap.keys());
 
-    const chatPartners = await User.find({ _id: {$in: chatPartnersIds}}).select("-password");
+    if(chatPartnersIds.length === 0) {
+      return res.status(200).json([]);
+    }
 
-    res.status(200).json(chatPartners)
+    const chatPartners = await User.find({
+      _id: { $in: chatPartnersIds },
+    }).select("-password");
+
+    // Sort the chat partners based on the time of the last message
+    chatPartners.sort((a, b) => {
+      const lastMessageA = latestMessagesMap.get(a._id.toString());
+      const lastMessageB = latestMessagesMap.get(b._id.toString());
+
+      return lastMessageB.createdAt - lastMessageA.createdAt;
+    });
+
+    const populatedChats = chatPartners.map(partner => {
+      const lastMessage = latestMessagesMap.get(partner._id.toString());
+      return {
+        ...partner.toObject(),
+        lastMessage: {
+          text: lastMessage.text || 'Image',
+          createdAt: lastMessage.createdAt
+        }
+      }
+    });
+
+    res.status(200).json(populatedChats);
   } catch (error) {
-    console.log("Error in getChatPartners of message.controller.js\n\nError:\n", error);
+    console.log(
+      "Error in getChatPartners of message.controller.js\n\nError:\n",
+      error
+    );
+    res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};
