@@ -35,9 +35,9 @@ function ChatWindow() {
   return (
     <>
       <ChatHeader />
-      <div className="flex-1 px-6 overflow-y-auto py-8">
+      <div className="flex-1 px-4 overflow-y-auto py-6">
         {messages.length > 0 && !isMessagesLoading ? (
-          <div className="max-w-3xl mx-auto space-y-6">
+          <div className="max-w-3xl mx-auto space-y-4">
             {messages.map((msg) => (
               <div
                 key={msg._id}
@@ -54,10 +54,10 @@ function ChatWindow() {
                     <img
                       src={msg.image}
                       alt='shared'
-                      className='rounded-lg h-48 object-cover'
+                      className='rounded-lg h-40 object-cover'
                     />
                   )}
-                  {msg.text && <p className='mt-2'>{msg.text}</p>}
+                  {msg.text && <p className='text-xs mt-1'>{msg.text}</p>}
                   <p className='text-xs mt-1 opacity-75 flex items-center gap-1'>
                     {new Date(msg.createdAt).toLocaleTimeString(undefined, {
                       hour: "2-digit",
