@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { axiosInstance } from '../lib/axios';
 import { toast } from 'react-hot-toast';
 import { io } from 'socket.io-client';
+import { useChatStore } from './useChatStore'; // Import useChatStore
 
 const BASE_URL = import.meta.env.MODE === 'development' ? 'http://localhost:3000' : 'https://chit-chat-sr.onrender.com';
 
@@ -51,7 +52,7 @@ export const useAuthStore = create((set, get) => ({
 
       get().connectSocket();
     } catch (e) {
-      toast.error(e.response.data.message);
+      toast.error("Login Failed. Please check your credentials.");
       console.log("Error in login auth store:\n\n", e);
     }
     set({ isLoggingIn: false });
@@ -62,7 +63,7 @@ export const useAuthStore = create((set, get) => ({
       await axiosInstance.get("/auth/logout");
       set({ authUser: null });
       toast.success("Logged out successfully!");
-
+      useChatStore.getState().clearChatState(); // Clear chat state
       get().disconnectSocket();
     } catch (e) {
       toast.error("Error logging out. Please try again.");

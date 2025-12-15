@@ -44,7 +44,7 @@ function ChatsList() {
               </div>
             </div>
             <p className='text-xs text-slate-400'>
-              {new Date(chat.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              {new Date(chat.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
             </p>
           </div>
         </div>

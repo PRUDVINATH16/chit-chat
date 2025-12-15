@@ -132,4 +132,13 @@ export const useChatStore = create((set, get) => ({
     socket.off("newMessage");
   },
 
+  clearChatState: () => {
+    set({
+      messages: [],
+      chats: [],
+      allContacts: [],
+      activeTab: "chats",
+      selectedUser: null,
+    });
+  }
 }));
