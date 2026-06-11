@@ -1,5 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+
+dotenv.config();
+
 import path from "path";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -9,8 +12,6 @@ import messageRoutes from "./routes/message.route.js";
 import { fileURLToPath } from "url";
 import { connectDB } from "./lib/db.js";
 import { server, app } from "./lib/socket.js";
-
-dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
