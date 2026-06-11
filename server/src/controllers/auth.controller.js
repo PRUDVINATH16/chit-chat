@@ -21,8 +21,6 @@ export const signup = async (req, res) => {
       return res.status(400).json({message: "Invalid email address", ok: false});
     }
 
-    console.log("details: ",fullName, email, password);
-
     const user = await User.findOne({email});
     if(user) {
       return res.status(400).json({message: "User already exists", ok: false});
@@ -36,8 +34,6 @@ export const signup = async (req, res) => {
       email,
       password: hashedPassword
     });
-
-    console.log("New user to be created:\n\n", newUser);
 
     if(newUser) {
       
