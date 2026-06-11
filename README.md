@@ -34,6 +34,10 @@ If you are thinking about setup, it is as easy as "npm install":
 3. Paste them, and your `.env` file will be generated automatically.
 4. Setup is complete!
 
+---
+*Once you have these, the setup script will help you generate your `.env` file.*
+---
+
 # 🔑 Credentials Needed For ENV
 
 To get this project running, you need to set up several API keys. Follow the links below to quickly get your credentials:
@@ -57,9 +61,6 @@ Used to send welcome emails. If using Gmail, you need an **App Password**.
 
 ### 5. JWT Secret
 Any random string of your choice to secure user sessions.
-
----
-*Once you have these, the setup script will help you generate your `.env` file.*
 
 ---
 *Built with ❤️ by Prudvi*
