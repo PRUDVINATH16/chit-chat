@@ -35,7 +35,7 @@ If you are thinking about setup, it is as easy as "npm install":
 4. Setup is complete!
 
 ---
-*Once you have these, the setup script will help you generate your `.env` file.*
+##*Once you have these, the setup script will help you generate your `.env` file.*
 ---
 
 # 🔑 Credentials Needed For ENV
