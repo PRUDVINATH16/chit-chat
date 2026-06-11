@@ -33,6 +33,14 @@ app.use(express.static(path.join(__dirname, "client")));
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Chit-Chat API Server!" });
+});
+
+app.get("/api", (req, res) => {
+  res.json({ message: "Chit-Chat API is active and healthy 🚀" });
+});
+
 if (process.env.NODE_ENV === "production") {
   // const clientPath = path.join(__dirname, "../../client");
   // app.use(express.static(clientPath));

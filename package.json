@@ -6,7 +6,7 @@
     "postinstall": "node scripts/install-submodules.js && node scripts/setup-env.js",
     "setup": "node scripts/setup-env.js",
     "build": "npm run build --prefix client",
-    "start": "npm run start --prefix server"
+    "start": "node scripts/start-app.js"
   },
   "repository": {
     "type": "git",

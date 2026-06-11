@@ -1,4 +1,4 @@
-# 🏗️ Architecture of the Project
+# 🏗️ Techstack of the Project
 
 Chit-Chat is built on a modern MERN stack with real-time capabilities.
 
