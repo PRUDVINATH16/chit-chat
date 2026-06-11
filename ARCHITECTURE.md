@@ -1,4 +1,4 @@
-# 🏗️ Architecture in 60 Seconds
+# 🏗️ Architecture of the Project
 
 Chit-Chat is built on a modern MERN stack with real-time capabilities.
 
