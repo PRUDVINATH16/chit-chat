@@ -24,7 +24,7 @@ const questions = [
   { key: 'CLOUDINARY_API_KEY', label: 'Cloudinary API Key' },
   { key: 'CLOUDINARY_API_SECRET', label: 'Cloudinary API Secret' },
   { key: 'ARCJET_KEY', label: 'Arcjet Key' },
-  { key: 'MAIL_USER', label: 'Email for Notifications (Nodemailer)' },
+  { key: 'MAIL_USER', label: 'Enter Your Email for Sending Notifications (Nodemailer)' },
   { key: 'MAIL_PASS', label: 'Email App Password' },
 ];
 
